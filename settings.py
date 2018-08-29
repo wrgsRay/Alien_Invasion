@@ -14,6 +14,9 @@ class Settings:
         self.screen_height = 800
         self.bg_color = (230, 230, 230)
 
+        #Ship Settings
+        self.ship_speed_factor = 1.5
+
 
 def main():
     print('This file is for import only.')
