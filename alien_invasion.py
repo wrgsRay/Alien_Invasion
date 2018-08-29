@@ -4,15 +4,15 @@ Python 3.6
 """
 import pygame
 import sys
+from settings import Settings
 
 
 def run_game():
     # Initialize game and create a screen object
     pygame.init()
-    screen = pygame.display.set_mode((1200, 800))
+    ai_settings = Settings()
+    screen = pygame.display.set_mode((ai_settings.screen_width, ai_settings.screen_width))
     pygame.display.set_caption('Alien Invasion')
-    # Set background color
-    bg_color = (230, 230, 230)
 
     # Start the main loop for the game
     while True:
@@ -22,7 +22,7 @@ def run_game():
             if event.type == pygame.QUIT:
                 sys.exit()
 
-        screen.fill(bg_color)
+        screen.fill(ai_settings.bg_color)
 
         # Make the most recent drawn screen visible
         pygame.display.flip()
