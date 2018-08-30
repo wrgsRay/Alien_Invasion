@@ -2,6 +2,7 @@
 Python 3.6
 @Author: wrgsRay
 """
+from alien import Alien
 from bullet import Bullet
 import pygame
 import sys
@@ -41,13 +42,13 @@ def check_events(ai_settings, screen, ship, bullets):
             check_keyup_events(event, ship)
 
 
-def update_screen(ai_settings, screen, ship, alien, bullets):
+def update_screen(ai_settings, screen, ship, aliens, bullets):
     screen.fill(ai_settings.bg_color)
     # Redraw all bullets behind ship and aliens
     for bullet in bullets.sprites():
         bullet.draw_bullet()
     ship.blitme()
-    alien.blitme()
+    aliens.draw(screen)
 
     # Make the most recent drawn screen visible
     pygame.display.flip()
@@ -67,6 +68,23 @@ def fire_bullet(ai_settings, screen, ship, bullets):
         # Create a new bullet and add it to the bullets group.
         new_bullet = Bullet(ai_settings, screen, ship)
         bullets.add(new_bullet)
+
+
+def create_fleet(ai_settings, screen, aliens):
+    # Create a fleet of aliens
+    # Create an alien and find the number of aliens in the row
+    # Spacing between each alien equals to one alien width
+    alien = Alien(ai_settings, screen)
+    alien_width = alien.rect.width
+    available_space_x = ai_settings.screen_width - 2 * alien_width
+    number_aliens_x = int(available_space_x / (2 * alien_width))
+    # Create the first row of aliens
+    for alien_number in range(number_aliens_x):
+        # Create an alien and placex it in the row.
+        alien = Alien(ai_settings, screen)
+        alien.x = alien_width + 2 * alien_width * alien_number
+        alien.rect.x = alien.x
+        aliens.add(alien)
 
 
 def main():
