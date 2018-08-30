@@ -43,7 +43,7 @@ class Ship:
 
 
 def main():
-    pass
+    print('Import only')
 
 
 if __name__ == '__main__':
